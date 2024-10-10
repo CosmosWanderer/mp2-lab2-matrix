@@ -244,7 +244,7 @@ public:
 
     bool operator!=(const TDynamicMatrix& m) const noexcept
     {
-        return !(*this == m)
+        return !(*this == m);
     }
 
     // получение размера
