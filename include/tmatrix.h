@@ -223,6 +223,7 @@ public:
     TDynamicMatrix(size_t s = 1) : TDynamicVector<TDynamicVector<T>>(s)
     {
         if (s > MAX_MATRIX_SIZE || s < 0) throw out_of_range("Size is incorrect");
+        sz = s;
         for (size_t i = 0; i < sz; i++)
         pMem[i] = TDynamicVector<T>(sz);
     }
@@ -269,7 +270,9 @@ public:
     TDynamicMatrix<T> operator*(const T& val)
     {
         TDynamicMatrix<T> res(sz);
-        res.pMem = pMem * val;
+        for (int i = 0; i < sz; i++) {
+            res.pMem[i] = pMem[i] * val;
+        }
         return res;
     }
 
@@ -304,7 +307,7 @@ public:
         if (sz != m.size()) throw logic_error("Matrices have different sizes");
         TDynamicMatrix<T> res(sz);
         for (int i = 0; i < sz; i++) {
-            res.pMem[i] = pMem[i] + m.pMem[i];
+            res.pMem[i] = pMem[i] - m.pMem[i];
         }
         return res;
     }
